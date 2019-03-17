@@ -1,0 +1,54 @@
+import random
+def quicksort2(ev_nums):
+    if len(ev_nums) <= 1:
+        return ev_nums
+    else:
+        p = random.choice(ev_nums)
+        low_nums = []
+        mid_nums = []
+        high_nums = []
+        for i in ev_nums:
+            if i > p:
+                low_nums.append(i)
+            elif i < p:
+                high_nums.append(i)
+            else:
+                mid_nums.append(i)
+
+        return quicksort2(low_nums)+mid_nums+quicksort2(high_nums)
+
+
+def quicksort1(ov_nums):
+    if len(ov_nums) <= 1:
+        return ov_nums
+    else:
+        q = random.choice(ov_nums)
+        l_nums = []
+        m_nums = []
+        h_nums = []
+        for i in ov_nums:
+            if i < q :
+                l_nums.append(i)
+            elif i > q :
+                h_nums.append(i)
+            else:
+                m_nums.append(i)
+
+        return quicksort1(l_nums) + m_nums + quicksort1(h_nums)
+
+
+
+
+
+
+N=int (input("Введите количество элементов массива "))
+
+if N>=2 and N<=10000:
+    x = list(map(int, input("Введите элементы массива").split()))
+else:
+    print("Массив не может быть создан")
+ov_nums = [int(i) for i in x if i % 2 == 0]
+ev_nums = [int(i) for i in x if i % 2 != 0]
+
+
+print(quicksort1(ov_nums)+quicksort2(ev_nums))
